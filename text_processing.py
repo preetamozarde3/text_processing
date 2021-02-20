@@ -181,6 +181,11 @@ def text_processing(df):
             background_sound.append(1)
         else:
             background_sound.append(0)
+            
+        i = re.sub("[-_]", " ", i)
+        i = re.sub("[()~]", "", i)
+        i = re.sub("<s/>", "", i)
+        i = re.sub("<c/>", ",", i)
 
     df['discourse_particles'] = discourse_particles
     df['fillers'] = fillers
