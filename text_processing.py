@@ -1,4 +1,5 @@
 import os, sys, re
+import codecs
 import pandas as pd
 
 def inputtextlines(filename):
@@ -6,6 +7,11 @@ def inputtextlines(filename):
     linelist = handle.readlines()
     handle.close()
     return linelist
+
+def inputtextlinesutf16(filename):
+    fp = codecs.open(filename, "r", "utf-16")
+    data = fp.readlines()
+    return data
 
 def converttextgrid2csv(textgridlines,textgridname):
 
@@ -218,6 +224,7 @@ for filename in textgridfiles:
     filename = 'C:/Users/Preetam/Scripts Same/' + filename
     textgrid = inputtextlines(filename)
     if textgrid == '':
+        textgrid = inputtextlinesutf16(filename)
         print(f'No input from file {filename}')
     csvtext, csv_content = converttextgrid2csv(textgrid,tgname)
     if csvtext == '':
